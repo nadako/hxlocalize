@@ -25,3 +25,10 @@ Then just call defined methods and get translated strings:
 ```haxe
 trace(locale.message(locale.person(), 5)); // Hi, Dan (5)!
 ```
+
+I think there are several benefits with this approach, such as:
+
+ * you can't make a typo in your locale key, since it's a real method, known at compile-time
+ * you get autocompletion and refactoring support for your locale keys
+ * localized string interpolation arguments are well-defined and typed
+ * it's easy to validate the translation data files from a macro using method definitions
