@@ -14,10 +14,10 @@ class MyLocale extends Locale {
 Then create an instance of that class, passing translations map like this:
 
 ```haxe
-var locale = new MyLocale([
+var locale = new MyLocale(new Catalog([
     "person" => "Dan",
     "message" => "Hi, {name} ({count})!" // `name` and `count` match argument names
-]);
+]));
 ```
 
 Then just call defined methods and get translated strings:

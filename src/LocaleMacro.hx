@@ -1,3 +1,4 @@
+#if macro
 import haxe.macro.Context;
 import haxe.macro.Expr;
 
@@ -7,17 +8,16 @@ class LocaleMacro {
         for (field in fields) {
             switch (field.kind) {
                 case FFun(fun) if (fun.expr == null):
-                    var argsExpr, isInline = false;
+                    field.access = [APublic, AInline];
                     if (fun.args.length > 0) {
-                        var args = [for (arg in fun.args) macro $v{arg.name} => Std.string($i{arg.name})];
-                        argsExpr = macro $a{args};
+                        var argsExpr = {
+                            pos: field.pos,
+                            expr: EObjectDecl([for (arg in fun.args) {field: arg.name, expr: macro $i{arg.name}}])
+                        };
+                        fun.expr = macro return this.__catalog.interpolate(new LocaleKey($v{field.name}), $argsExpr);
                     } else {
-                        argsExpr = macro null;
-                        isInline = true;
+                        fun.expr = macro return this.__catalog.get(new LocaleKey($v{field.name}));
                     }
-                    fun.expr = macro return this.__localize($v{field.name}, $argsExpr);
-                    field.access = [APublic];
-                    if (isInline) field.access.push(AInline);
                 default:
             }
         }
@@ -27,10 +27,11 @@ class LocaleMacro {
             pos: Context.currentPos(),
             kind: FFun({
                 ret: null,
-                args: [{name: "data", type: null}],
-                expr: macro super(data)
+                args: [{name: "catalog", type: macro : Catalog}],
+                expr: macro super(catalog)
             })
         });
         return fields;
     }
 }
+#end
