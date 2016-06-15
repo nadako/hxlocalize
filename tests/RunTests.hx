@@ -17,13 +17,9 @@ class RunTests extends TestCase {
     exit(runner.run() ? 0 : 500);
   }
   
-  function testBasic() {
+  function testCatalog() {
     
     var catalog = new Catalog([
-        "item" => "Apple",
-        "person" => "Dan",
-        "message" => "Hi, {name} ({count} times)!",
-
         "pony_name" => "A pony",
         "pony_message" => "Hey, {name}, you just received {count} ponies as a gift!",
     ]);
@@ -31,10 +27,30 @@ class RunTests extends TestCase {
     var pony = new Gift("pony_name", "pony_message");
     assertEquals('A pony', catalog.get(pony.name));
     assertEquals('Hey, Dan, you just received 5 ponies as a gift!' ,catalog.interpolate(pony.message, {name: "Dan", count: 5}));
-
+  }
+  
+  function testLocale() {
+    
+    var catalog = new Catalog([
+        "item" => "Apple",
+        "person" => "Dan",
+        "message" => "Hi, {name} ({count} times)!",
+    ]);
+    
     var locale = new MyLocale(catalog);
     assertEquals('Hi, Dan (5 times)!', locale.message(locale.person(), 5));
     assertEquals('Apple', locale.item);
+  }
+  
+  function testMissingCatalogEntry() {
+    
+    var catalog = new Catalog([
+        "message" => "Hi, {name} ({count} times)!",
+    ]);
+
+    var locale = new MyLocale(catalog);
+    assertEquals('Hi, NOT LOCALIZED: person (5 times)!', locale.message(locale.person(), 5));
+    assertEquals('NOT LOCALIZED: item', locale.item);
   }
   
 }
