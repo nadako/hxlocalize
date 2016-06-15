@@ -1,3 +1,5 @@
+package localize;
+
 class Catalog {
     var data:Map<String,String>;
 
