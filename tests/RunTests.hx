@@ -29,13 +29,11 @@ class RunTests extends TestCase {
 
     function testLocale() {
         var catalog = new Catalog([
-            "item" => "Apple",
             "person" => "Dan",
             "message" => "Hi, {name} ({count} times)!",
         ]);
         var locale = new MyLocale(catalog);
         assertEquals('Hi, Dan (5 times)!', locale.message(locale.person(), 5));
-        assertEquals('Apple', locale.item);
     }
 
     function testMissingCatalogEntry() {
@@ -44,9 +42,7 @@ class RunTests extends TestCase {
         ]);
         var locale = new MyLocale(catalog);
         assertEquals('Hi, NOT LOCALIZED: person (5 times)!', locale.message(locale.person(), 5));
-        assertEquals('NOT LOCALIZED: item', locale.item);
     }
-  
 }
 class Gift {
     public var name:LocaleKey<Void>;
