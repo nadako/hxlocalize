@@ -1,0 +1,19 @@
+{
+  "name": "hxlocalize",
+  "license": "MIT",
+  "tags": [
+    "localization",
+    "i18n",
+    "internationalization",
+    "locale",
+    "localize",
+    "cross"
+  ],
+  "classPath": "src",
+  "contributors": [
+    "nadako"
+  ],
+  "releasenote": "initial release",
+  "version": "0.0.1",
+  "dependencies": {}
+}

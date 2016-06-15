@@ -1,4 +1,6 @@
-@:autoBuild(LocaleMacro.build())
+package localize;
+
+@:autoBuild(localize.LocaleMacro.build())
 class Locale {
     var __catalog:Catalog;
 
