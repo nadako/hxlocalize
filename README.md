@@ -1,5 +1,7 @@
 # hxlocalize
 
+[![Build Status](https://travis-ci.org/nadako/hxlocalize.svg?branch=master)](https://travis-ci.org/nadako/hxlocalize)
+
 This is my small experiment with implementing type-safe localization in Haxe using macros.
 
 The idea is pretty simple: you declare all possible messages as empty methods in a child class of a magic base-class, like this:
