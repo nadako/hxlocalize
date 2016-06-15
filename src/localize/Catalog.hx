@@ -6,6 +6,10 @@ class Catalog {
     public function new(data:Map<String,String>) {
         this.data = data;
     }
+    
+    public inline function exists(key:String) {
+        return data.exists(key);
+    }
 
     public function get(key:LocaleKey<Void>):String {
         var s = data[key.toString()];
