@@ -20,6 +20,7 @@ class RunTests extends TestCase {
   function testBasic() {
     
     var catalog = new Catalog([
+        "item" => "Apple",
         "person" => "Dan",
         "message" => "Hi, {name} ({count} times)!",
 
@@ -33,9 +34,7 @@ class RunTests extends TestCase {
 
     var locale = new MyLocale(catalog);
     assertEquals('Hi, Dan (5 times)!', locale.message(locale.person(), 5));
-    
-    
-  
+    assertEquals('Apple', locale.item);
   }
   
 }
@@ -50,6 +49,7 @@ class Gift {
 }
 
 class MyLocale extends Locale {
+    var item:String;
     function person():String;
     function message(name:String, count:Int):String;
 }
