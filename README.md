@@ -4,6 +4,8 @@
 
 This is my small experiment with implementing type-safe localization in Haxe using macros.
 
+> The awesome @kevinresol developed a proper library based on this idea, so if you're looking for a complete solution, check out [turnwing](https://github.com/kevinresol/turnwing)!
+
 The idea is pretty simple: you declare all possible messages as empty methods in a child class of a magic base-class, like this:
 
 ```haxe
